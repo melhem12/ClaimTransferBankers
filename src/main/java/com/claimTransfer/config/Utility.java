@@ -10,7 +10,7 @@ import java.util.Properties;
 public class Utility {
 	
 //	private static final String FILE_CONFIG_LOCATION = "C://Users//User//Desktop//Validator.properties";
-private static final String FILE_CONFIG_LOCATION = "C://appsfiles//dataTransferValidator//dataTransferValidator.properties";
+private static final String FILE_CONFIG_LOCATION = "C://appsfiles//dataTransferValidator//claimsValidator.properties";
 	private static final String EMPTY_STRING_VALUE = "";
 
 	public static String getPropStringValues(String propertuValue) {

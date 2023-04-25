@@ -9,17 +9,41 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
 public class ClaimTransferRequest implements Serializable {
-
 	@Override
 	public String toString() {
-		return "ClaimTransferRequest [claimTransferId=" + claimTransferId + ", claimTransferNotification="
-				+ claimTransferNotification + ", claimTransferNumber=" + claimTransferNumber + ", policyId=" + policyId
-				+ ", vehicleCertificate=" + vehicleCertificate + ", accidentDate=" + accidentDate + ", reportedDate="
-				+ reportedDate + ", statusCode=" + statusCode + ", statusDate=" + statusDate + ", accidentLongitude="
-				+ accidentLongitude + ", accidentLatitude=" + accidentLatitude + ", accidentLocation_Desc="
-				+ accidentLocation_Desc + ", claimReason=" + claimReason + ", claimTransferPersonRequestList="
-				+ claimTransferPersonRequestList + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "{" +
+				"claimTransferId='" + claimTransferId + '\'' +"\n"+
+				", claimTransferNotification='" + claimTransferNotification + '\'' +"\n"+
+				", claimRelatedNotification='" + claimRelatedNotification + '\'' +"\n"+
+				", claimTransferNumber='" + claimTransferNumber + '\'' +"\n"+
+				", policyId='" + policyId + '\'' +"\n"+
+				", policyNumber='" + policyNumber + '\'' +"\n"+
+				", certifId='" + certifId + '\'' +"\n"+
+				", vehicleCertificate='" + vehicleCertificate + '\'' +"\n"+
+				", accidentDate='" + accidentDate + '\'' +"\n"+
+				", accidentTime='" + accidentTime + '\'' +"\n"+
+				", reportedDate='" + reportedDate + '\'' +"\n"+
+				", reportedTime='" + reportedTime + '\'' +"\n"+
+				", statusCode='" + statusCode + '\'' +"\n"+
+				", statusDescription='" + statusDescription + '\'' +"\n"+
+				", statusDate='" + statusDate + '\'' +"\n"+
+				", accidentLongitude='" + accidentLongitude + '\'' +"\n"+
+				", accidentLatitude='" + accidentLatitude + '\'' +"\n"+
+				", accidentLocation_Desc='" + accidentLocation_Desc + '\'' +"\n"+
+				", claimReason='" + claimReason + '\'' +"\n"+
+				", totalReserve='" + totalReserve + '\'' +"\n"+
+				", coverCode='" + coverCode + '\'' +"\n"+
+				", riskType='" + riskType + '\'' +"\n"+
+				", reserveCurrency='" + reserveCurrency + '\'' +"\n"+
+				", totalPaid='" + totalPaid + '\'' +"\n"+
+				", totalOS='" + totalOS + '\'' +"\n"+
+				", reserveDifference='" + reserveDifference + '\'' +"\n"+
+				", expertCode='" + expertCode + '\'' +"\n"+
+				", expertName='" + expertName + '\'' +"\n"+
+				", accidentLocation_Caza='" + accidentLocation_Caza + '\'' +"\n"+
+				", accidentLocation_Mohafaza='" + accidentLocation_Mohafaza + '\'' +"\n"+
+				", claimTransferPersonRequestList=" + claimTransferPersonRequestList +"\n"+
+				'}';
 	}
 
 	private static final long serialVersionUID = 1L;

@@ -77,6 +77,16 @@ public class CarsDtClaimMaterialDamage {
 	public void setMaterialDamageSequence(String materialDamageSequence) {
 		this.materialDamageSequence = materialDamageSequence;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "CarsDtClaimMaterialDamage{" +
+				"dtId='" + dtId + '\'' +
+				", materialDamageOwnerName='" + materialDamageOwnerName + '\'' +
+				", materialDamageOwnerPhone='" + materialDamageOwnerPhone + '\'' +
+				", materialDamageMaterialTypeDesc='" + materialDamageMaterialTypeDesc + '\'' +
+				", materialDamageSequence='" + materialDamageSequence + '\'' +
+				", materialDamageSequenceLink='" + materialDamageSequenceLink + '\'' +
+				'}';
+	}
 }

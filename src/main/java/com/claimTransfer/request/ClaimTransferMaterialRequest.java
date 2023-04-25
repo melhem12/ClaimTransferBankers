@@ -56,5 +56,14 @@ public class ClaimTransferMaterialRequest implements Serializable{
 		this.materialDescription = materialDescription;
 	}
 
+	@Override
+	public String toString() {
+		return "ClaimTransferMaterialRequest{" +
+				"materialFullName='" + materialFullName + '\'' +
+				", materialMobileNumber='" + materialMobileNumber + '\'' +
+				", materialDescription='" + materialDescription + '\'' +
+				", matSequenceLink='" + matSequenceLink + '\'' +
+				'}';
+	}
 }
 

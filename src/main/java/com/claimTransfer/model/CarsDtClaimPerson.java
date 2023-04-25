@@ -264,7 +264,33 @@ public class CarsDtClaimPerson {
 	public void setLicInceptionDate(String licInceptionDate) {
 		this.licInceptionDate = licInceptionDate;
 	}
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "CarsDtClaimPerson{" +
+				"dtId='" + dtId + '\'' +
+				", vehSeq='" + vehSeq + '\'' +
+				", ownerFamilyName='" + ownerFamilyName + '\'' +
+				", ownerFatherName='" + ownerFatherName + '\'' +
+				", ownerFirstName='" + ownerFirstName + '\'' +
+				", driverFamilyName='" + driverFamilyName + '\'' +
+				", driverFatherName='" + driverFatherName + '\'' +
+				", driverFirstName='" + driverFirstName + '\'' +
+				", driverPhone='" + driverPhone + '\'' +
+				", gender='" + gender + '\'' +
+				", dob='" + dob + '\'' +
+				", makeCode='" + makeCode + '\'' +
+				", modelCode='" + modelCode + '\'' +
+				", vehicleYear='" + vehicleYear + '\'' +
+				", tpCompanyCode='" + tpCompanyCode + '\'' +
+				", tpCompanyName='" + tpCompanyName + '\'' +
+				", scriptName='" + scriptName + '\'' +
+				", notification='" + notification + '\'' +
+				", licenseNo='" + licenseNo + '\'' +
+				", licExpiryDate='" + licExpiryDate + '\'' +
+				", licenseType='" + licenseType + '\'' +
+				", licInceptionDate='" + licInceptionDate + '\'' +
+				'}';
+	}
 }

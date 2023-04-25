@@ -16,4 +16,10 @@ public class ClaimTransferListRequest implements Serializable {
 		this.claimTransferRequestList = claimTransferRequestList;
 	}
 
+	@Override
+	public String toString() {
+		return "ClaimTransferListRequest{" +
+				"claimTransferRequestList=" + claimTransferRequestList +
+				'}';
+	}
 }

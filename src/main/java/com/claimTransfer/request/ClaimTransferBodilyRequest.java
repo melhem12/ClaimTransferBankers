@@ -88,7 +88,17 @@ public class ClaimTransferBodilyRequest implements Serializable{
 		this.bodilyType = bodilyType;
 	}
 
-	
-	
 
+	@Override
+	public String toString() {
+		return "ClaimTransferBodilyRequest{" +
+				"bodilyFirstName='" + bodilyFirstName + '\'' +
+				", bodilyMiddleName='" + bodilyMiddleName + '\'' +
+				", bodilyLastName='" + bodilyLastName + '\'' +
+				", bodilyDob='" + bodilyDob + '\'' +
+				", bodilyMobileNumber='" + bodilyMobileNumber + '\'' +
+				", bodilyType='" + bodilyType + '\'' +
+				", bodilyVehicleSequenceLink='" + bodilyVehicleSequenceLink + '\'' +
+				'}';
+	}
 }

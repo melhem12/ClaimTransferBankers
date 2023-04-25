@@ -3,6 +3,34 @@ package com.claimTransfer.request;
 import io.swagger.annotations.ApiModelProperty;
 
 public class ClaimTransferVehicleRequest {
+	@Override
+	public String toString() {
+		return "ClaimTransferVehicleRequest{" +
+				"ownerFamilyName='" + ownerFamilyName + '\'' +
+				", ownerMiddleName='" + ownerMiddleName + '\'' +
+				", ownerFirstName='" + ownerFirstName + '\'' +
+				", driverFamilyName='" + driverFamilyName + '\'' +
+				", driverMiddleName='" + driverMiddleName + '\'' +
+				", driverFirstName='" + driverFirstName + '\'' +
+				", driverPhone='" + driverPhone + '\'' +
+				", driverGender='" + driverGender + '\'' +
+				", driverDob='" + driverDob + '\'' +
+				", drivingLicenseNumber='" + drivingLicenseNumber + '\'' +
+				", drivingLicenseExpiryDate='" + drivingLicenseExpiryDate + '\'' +
+				", drivingLicenseType='" + drivingLicenseType + '\'' +
+				", drivingLicenseInceptionDate='" + drivingLicenseInceptionDate + '\'' +
+				", makeDescription='" + makeDescription + '\'' +
+				", modelDescription='" + modelDescription + '\'' +
+				", vehicleYear='" + vehicleYear + '\'' +
+				", platePrefix='" + platePrefix + '\'' +
+				", plateNumber='" + plateNumber + '\'' +
+				", tpCompanyCode='" + tpCompanyCode + '\'' +
+				", tpCompanyName='" + tpCompanyName + '\'' +
+				", tpPolicyNumber='" + tpPolicyNumber + '\'' +
+				", tpPolEffective='" + tpPolEffective + '\'' +
+				", tpPolExpiry='" + tpPolExpiry + '\'' +
+				'}';
+	}
 
 	@ApiModelProperty(position = 1)
 	private String ownerFamilyName;

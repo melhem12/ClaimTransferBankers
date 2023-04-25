@@ -147,6 +147,22 @@ public class CarsDtClaimSettls {
 	public void setPayeeTypeDescription(String payeeTypeDescription) {
 		this.payeeTypeDescription = payeeTypeDescription;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "CarsDtClaimSettls{" +
+				"dtId='" + dtId + '\'' +
+				", transaction='" + transaction + '\'' +
+				", paymentSequence='" + paymentSequence + '\'' +
+				", currency='" + currency + '\'' +
+				", paidAmount='" + paidAmount + '\'' +
+				", paymentDate='" + paymentDate + '\'' +
+				", payeeTypeCode='" + payeeTypeCode + '\'' +
+				", payeeTypeDescription='" + payeeTypeDescription + '\'' +
+				", payeeCode='" + payeeCode + '\'' +
+				", payeeName='" + payeeName + '\'' +
+				", setType='" + setType + '\'' +
+				", riskType='" + riskType + '\'' +
+				'}';
+	}
 }

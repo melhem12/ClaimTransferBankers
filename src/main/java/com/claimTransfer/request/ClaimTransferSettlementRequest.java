@@ -125,4 +125,19 @@ public class ClaimTransferSettlementRequest implements Serializable {
 		this.payeeTypeDescription = payeeTypeDescription;
 	}
 
+	@Override
+	public String toString() {
+		return "ClaimTransferSettlementRequest{" +
+				"transaction='" + transaction + '\'' +
+				", paymentSequence='" + paymentSequence + '\'' +
+				", currency='" + currency + '\'' +
+				", paidAmount='" + paidAmount + '\'' +
+				", paymentDate='" + paymentDate + '\'' +
+				", payeeTypeCode='" + payeeTypeCode + '\'' +
+				", payeeTypeDescription='" + payeeTypeDescription + '\'' +
+				", payeeCode='" + payeeCode + '\'' +
+				", payeeName='" + payeeName + '\'' +
+				", type='" + type + '\'' +
+				'}';
+	}
 }

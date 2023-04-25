@@ -133,6 +133,21 @@ public class CarsDtClaimCCovers {
 	public void setCurrency(String currency) {
 		Currency = currency;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "CarsDtClaimCCovers{" +
+				"dtId='" + dtId + '\'' +
+				", sequence='" + sequence + '\'' +
+				", coverCode='" + coverCode + '\'' +
+				", reserveAmount='" + reserveAmount + '\'' +
+				", Currency='" + Currency + '\'' +
+				", recoveryReserveAmount='" + recoveryReserveAmount + '\'' +
+				", setType='" + setType + '\'' +
+				", payeeProfileType='" + payeeProfileType + '\'' +
+				", payeeProfileCode='" + payeeProfileCode + '\'' +
+				", payeeAssessmentType='" + payeeAssessmentType + '\'' +
+				", notificationSeq='" + notificationSeq + '\'' +
+				'}';
+	}
 }

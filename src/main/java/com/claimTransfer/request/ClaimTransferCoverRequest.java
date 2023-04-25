@@ -143,7 +143,22 @@ public class ClaimTransferCoverRequest implements Serializable{
 	public void setReserveCurrency(String reserveCurrency) {
 		this.reserveCurrency = reserveCurrency;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "ClaimTransferCoverRequest{" +
+				"sequence='" + sequence + '\'' +
+				", coverCode='" + coverCode + '\'' +
+				", subcover='" + subcover + '\'' +
+				", subcoverCode='" + subcoverCode + '\'' +
+				", riskType='" + riskType + '\'' +
+				", assessmentType='" + assessmentType + '\'' +
+				", profileType='" + profileType + '\'' +
+				", profileCode='" + profileCode + '\'' +
+				", reserveCurrency='" + reserveCurrency + '\'' +
+				", reserveAmount='" + reserveAmount + '\'' +
+				", recoveryReserveAmount='" + recoveryReserveAmount + '\'' +
+				", claimTransferSettlementRequestList=" + claimTransferSettlementRequestList +
+				'}';
+	}
 }

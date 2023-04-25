@@ -4,6 +4,8 @@ import com.claimTransfer.request.ClaimTransferRequest;
 
 public class ClaimsResponse {
   private String responseDesc ;
+  private String responseMessage ;
+
   private String claimNO ;
   private ClaimTransferRequest claims;
 
@@ -29,5 +31,13 @@ public class ClaimsResponse {
 
   public void setClaims(ClaimTransferRequest claims) {
     this.claims = claims;
+  }
+
+  public String getResponseMessage() {
+    return responseMessage;
+  }
+
+  public void setResponseMessage(String responseMessage) {
+    this.responseMessage = responseMessage;
   }
 }

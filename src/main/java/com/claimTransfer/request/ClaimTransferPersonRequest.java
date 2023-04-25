@@ -9,7 +9,19 @@ import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClaimTransferPersonRequest implements Serializable{
-	
+	@Override
+	public String toString() {
+		return "ClaimTransferPersonRequest{" +
+				"sequence='" + sequence + '\'' +
+				", vehicleSequence='" + vehicleSequence + '\'' +
+				", responsibility='" + responsibility + '\'' +
+				", claimTransferVehicleRequest=" + claimTransferVehicleRequest +
+				", claimTransferBodilyRequest=" + claimTransferBodilyRequest +
+				", claimTransferMaterialRequest=" + claimTransferMaterialRequest +
+				", claimTransferCoverRequestList=" + claimTransferCoverRequestList +
+				'}';
+	}
+
 	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(position = 1)

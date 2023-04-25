@@ -23,5 +23,10 @@ public interface CarsDtClaimCRepository extends JpaRepository<CarsDtClaimC, Stri
 	+ " AND NOTIFICATION = trim(?3)   ORDER BY NOTIFICATION "
 	,nativeQuery =true )
 	List<CarsDtClaimC> getCarsDtClaimC(String insuranceId ,String scriptName,String notification);
+
+
+
+	@Query(value = " SELECT CONFIG_VALUE FROM CORE_CONFIGURATION WHERE ID = ?1 ", nativeQuery = true)
+	String findConfigByKey(String key);
 	
 }

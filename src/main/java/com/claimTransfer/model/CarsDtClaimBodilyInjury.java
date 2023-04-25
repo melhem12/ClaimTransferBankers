@@ -196,5 +196,26 @@ public class CarsDtClaimBodilyInjury {
 		this.notification = notification;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "CarsDtClaimBodilyInjury{" +
+				"dtId='" + dtId + '\'' +
+				", injuredId='" + injuredId + '\'' +
+				", injuredNotificationId='" + injuredNotificationId + '\'' +
+				", injuredSeq='" + injuredSeq + '\'' +
+				", bodilyLastName='" + bodilyLastName + '\'' +
+				", bodilyFirstName='" + bodilyFirstName + '\'' +
+				", injuredFather='" + injuredFather + '\'' +
+				", injuredGender='" + injuredGender + '\'' +
+				", injuredPlace='" + injuredPlace + '\'' +
+				", bodilyMobileNumber='" + bodilyMobileNumber + '\'' +
+				", injuredHospitalId='" + injuredHospitalId + '\'' +
+				", bodilyDob='" + bodilyDob + '\'' +
+				", injuredIdentificationId='" + injuredIdentificationId + '\'' +
+				", insID='" + insID + '\'' +
+				", scriptName='" + scriptName + '\'' +
+				", notification='" + notification + '\'' +
+				", vehicleSequenceLink='" + vehicleSequenceLink + '\'' +
+				'}';
+	}
 }

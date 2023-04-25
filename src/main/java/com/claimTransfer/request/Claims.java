@@ -12,4 +12,11 @@ public class Claims {
     public void setClaims(List<ClaimTransferRequest> claims) {
         this.claims = claims;
     }
+
+    @Override
+    public String toString() {
+        return "Claims{" +
+                "claims=" + claims +
+                '}';
+    }
 }

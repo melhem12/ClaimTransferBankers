@@ -356,6 +356,43 @@ public class CarsDtClaimC {
 		this.reportedTime = reportedTime;
 	}
 
+	@Override
+	public String toString() {
+		return "CarsDtClaimC{" +
+				"dtId='" + dtId + '\'' +
+				", notification='" + notification + '\'' +
+				", claimNum='" + claimNum + '\'' +
+				", policySerie='" + policySerie + '\'' +
+				", policyId='" + policyId + '\'' +
+				", vehicleSerie='" + vehicleSerie + '\'' +
+				", accidentDate='" + accidentDate + '\'' +
+				", reportedDate='" + reportedDate + '\'' +
+				", accidentTime='" + accidentTime + '\'' +
+				", reportedTime='" + reportedTime + '\'' +
+				", statusCode='" + statusCode + '\'' +
+				", statusDescription='" + statusDescription + '\'' +
+				", statusDate='" + statusDate + '\'' +
+				", accidentLongitude='" + accidentLongitude + '\'' +
+				", accidentLatitude='" + accidentLatitude + '\'' +
+				", accidentLocation='" + accidentLocation + '\'' +
+				", claimReason='" + claimReason + '\'' +
+				", scriptName='" + scriptName + '\'' +
+				", relatedNotification='" + relatedNotification + '\'' +
+				", reserveAmountUsd='" + reserveAmountUsd + '\'' +
+				", totalPaidUsd='" + totalPaidUsd + '\'' +
+				", expertName='" + expertName + '\'' +
+				", expertCode='" + expertCode + '\'' +
+				", reserveDifference='" + reserveDifference + '\'' +
+				", accidentLocationDistrict='" + accidentLocationDistrict + '\'' +
+				", accidentLocationCAZA='" + accidentLocationCAZA + '\'' +
+				", defaultCoverCode='" + defaultCoverCode + '\'' +
+				", defaultRiskType='" + defaultRiskType + '\'' +
+				", Currency='" + Currency + '\'' +
+				", policyCertifId='" + policyCertifId + '\'' +
+				", policyFleetID='" + policyFleetID + '\'' +
+				'}';
+	}
+
 	public void setPolicyId(String policyId) {
 		this.policyId = policyId;
 	}
