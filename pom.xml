@@ -12,7 +12,10 @@
 	<artifactId>claimTransfer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ClaimTransfer2</name>
+<!--	<packaging>war</packaging>-->
+
 	<description>Claim Transfer</description>
+
 	<properties>
 		<java.version>8</java.version>
 	</properties>

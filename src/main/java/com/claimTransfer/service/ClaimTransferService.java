@@ -14,8 +14,7 @@ import com.claimTransfer.config.SendingMail;
 import com.claimTransfer.model.*;
 import com.claimTransfer.repository.*;
 import com.claimTransfer.request.*;
-import com.claimTransfer.response.ClaimsResponse;
-import com.claimTransfer.response.ClaimsResponseTemplate;
+import com.claimTransfer.response.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.apache.catalina.connector.Response;
@@ -30,7 +29,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.claimTransfer.response.CarsDtClaimPersonResponse;
 import com.claimTransfer.config.Utility;
 
 import ch.qos.logback.classic.pattern.Util;
@@ -62,14 +60,14 @@ CarsInsuranceRepository carsInsuranceRepository;
 	private SimpleJdbcCall simpleJdbcCall2;
 private String companyName="";
 	/* Calling Stored Procedure using SimpleJdbcCall */
-
+	private  String baseUrl="";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	public String procedure(String company, Date fromDate, Date toDate, String notification,String batch) {
-
+		System.out.println("///////////////////////////////////");
 		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-				.withFunctionName("FC_CLAIM_TRANSFER")
+				.withFunctionName("FC_CLAIM_TRANSFER_DATA")
 				.declareParameters(new SqlParameter("u_id", Types.BIGINT));
 
 		String out = simpleJdbcCall.executeFunction(String.class,
@@ -97,7 +95,7 @@ private String companyName="";
 
 ClaimsResponse claimsResponse = new ClaimsResponse();
 String out =procedure(insuranceId,new SimpleDateFormat("dd-MMM-yyyy").parse(fromDate),new SimpleDateFormat("dd-MMM-yyyy").parse(toDate),notification,batch);
-		System.out.println(out);
+		System.out.println("fuction>>>>  "+out);
 
 
 
@@ -897,6 +895,9 @@ else {
 //		
 //		return claimTransferRequest1;
 //		}).collect(Collectors.toList());
+		System.out.println(claimTransferRequest);
+		
+		
 	ClaimsResponseTemplate claimsResponseTemplate=	sendData(claimTransferRequest,notification,insuranceId);
 		claimsResponse.setClaimNO(claimsResponseTemplate.getClaimNo());
 		claimsResponse.setResponseDesc(claimsResponseTemplate.getResponseDesc());
@@ -975,16 +976,43 @@ else {
 	public ClaimsResponseTemplate sendData(ClaimTransferRequest claimTransferRequest,String notification ,String companyId) throws URISyntaxException {
 		ClaimsResponseTemplate response = new ClaimsResponseTemplate();
 		RestTemplate restTemplate = new RestTemplate();
-		URI uri = new URI("https://iris5.liaassurex.com:4104/api/CEClaim/CreateClaim");
+
+		 baseUrl=carsDtClaimCRepository.findConfigByKey(companyId+".claim.integration.url");
+		System.out.println(" my base url is"+baseUrl);
+		URI uri = new URI(baseUrl);
+
 
 try {
 	ResponseEntity<ClaimsResponseTemplate> result = restTemplate.postForEntity(uri, claimTransferRequest, ClaimsResponseTemplate.class);
 
 	System.out.println(result.getBody().getResponseMessage());
 	//if(result.getBody().getClaimNo())
+	String		 value2=carsDtClaimCRepository.findConfigByKey(companyId+".send.JSON.claim.any");
+
 	if(result.getStatusCodeValue()==Response.SC_OK){
 		response=result.getBody();
 		if(result.getBody().getResponseCode()==1){
+			if(value2!=null){
+				if(value2.equals("true")){
+					String body="";
+					if(response.getResponseMessage()!=null){
+						if(response.getResponseMessage()!=null){
+							body=response.getResponseMessage();
+
+						}
+						if(response.getResponseDesc()!=null){
+							body=body+" "+response.getResponseDesc();
+
+						}
+					}
+					ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+					String json = ow.writeValueAsString(claimTransferRequest);
+					body=body+"\n"+ json;
+					SendingMail sendingMail = new SendingMail();
+					sendingMail.run(companyName+" "+ claimTransferRequest.getClaimTransferId(),body,companyId);
+
+				}
+			}
 			updateInsClaimNumber(companyId,notification,result.getBody().getClaimNo(),null,null,null,null);
 
 		}
@@ -1000,14 +1028,34 @@ try {
 
 				}
 			}
-			System.out.println(claimTransferRequest.toString());
 			ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 			String json = ow.writeValueAsString(claimTransferRequest);
 			body=body+"\n"+ json;
 			SendingMail sendingMail = new SendingMail();
-			sendingMail.run(companyName+" "+ claimTransferRequest.getClaimTransferId(),body,companyId);
+
+			String		 value=carsDtClaimCRepository.findConfigByKey(companyId+".send.JSON.claim");
+			System.out.println("my value"+value);
+			if(value!=null){
+				if(value.equals("true"))
+				sendingMail.run(companyName+" "+ claimTransferRequest.getClaimTransferId(),body,companyId);
+
+			}
 		}
 
+	}else{
+		String body="";
+		body=result.getBody().toString();
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		String json = ow.writeValueAsString(claimTransferRequest);
+		body=body+"\n"+ json;
+		System.out.println("Response Code not ok");
+		if(value2!=null){
+			if(value2.equals("true")){
+				SendingMail sendingMail = new SendingMail();
+				sendingMail.run(companyName+" "+ claimTransferRequest.getClaimTransferId(),body,companyId);
+
+			}
+		}
 	}
 }
 catch (Exception exception){
@@ -1047,4 +1095,35 @@ return  response;
 	}
 
 
+	public ResponseEntity<ClaimsListResponse> generateClaimsSurveyList(List<ClaimsRequest> claimsRequestList) {
+		ClaimsListResponse claimsListResponse = new ClaimsListResponse();
+		List<ClaimsResponseCustom> claimsResponseCustomList= new ArrayList<>();
+		if (claimsRequestList.size()<=50){
+			claimsRequestList.forEach(claimsRequest -> {
+				try {
+
+					ClaimsResponse claimsResponse  = generateClaimsSurvey(claimsRequest.getNotification(),claimsRequest.getInsuranceId(),claimsRequest.getFromDate(),claimsRequest.getBatch(),claimsRequest.getToDate()).getBody();
+					ClaimsResponseCustom claimsResponseCustom= new ClaimsResponseCustom();
+					claimsResponseCustom.setClaimNO(claimsResponse.getClaimNO());
+					claimsResponseCustom.setResponseDesc(claimsResponse.getResponseDesc());
+					claimsResponseCustom.setClaimTransferNotification(claimsResponse.getClaims().getClaimTransferNotification());
+					claimsResponseCustom.setClaimTransferId(claimsResponse.getClaims().getClaimTransferId());
+					claimsResponseCustomList.add(claimsResponseCustom);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+
+				}
+
+			});
+			claimsListResponse.setClaimsResponseList(claimsResponseCustomList);
+			claimsListResponse.setMessage("success");
+			return 	new ResponseEntity<ClaimsListResponse>(claimsListResponse, HttpStatus.OK);
+
+		}else{
+			claimsListResponse.setMessage("your claims must below 50");
+			return 	new ResponseEntity<ClaimsListResponse>(claimsListResponse, HttpStatus.FAILED_DEPENDENCY);
+
+		}
+	}
 }

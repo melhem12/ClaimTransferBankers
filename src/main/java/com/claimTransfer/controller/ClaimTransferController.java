@@ -10,15 +10,12 @@ import java.util.*;
 
 //import org.apache.commons.beanutils.BeanUtils;
 import com.claimTransfer.request.*;
+import com.claimTransfer.response.ClaimsListResponse;
 import com.claimTransfer.response.ClaimsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.claimTransfer.repository.CarsDtClaimBodilyInjuryRepository;
 import com.claimTransfer.repository.CarsDtClaimCCoversRepository;
@@ -476,6 +473,32 @@ public class ClaimTransferController {
 			return new ResponseEntity(sStackTrace, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+
+
+
+
+	@PostMapping("/claimsList")
+	public ResponseEntity<ClaimsListResponse> generateClaimsList(
+			@RequestBody List<ClaimsRequest> claimsRequestList)
+			throws Exception {
+		try {
+			return claimTransferService.generateClaimsSurveyList( claimsRequestList);
+
+		} catch (
+
+				Exception e) {
+			e.printStackTrace();
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			String sStackTrace = sw.toString();
+			return new ResponseEntity(sStackTrace, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+
 
 	public String stringtoyear(String s) {
 		try {
