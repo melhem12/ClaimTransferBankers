@@ -393,7 +393,7 @@ else {
 
 							List<CarsDtClaimSettls> carsDtClaimSettlsList = carsDtClaimSettlsRepository
 									.getCarsDtClaimSettls(insuranceId, scriptName, notification,
-											carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(),carsDtClaimCCovers.getNotificationSeq());
+											carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(),carsDtClaimCCovers.getNotificationSeq(),carsDtClaimCCovers.getPayeeProfileCode());
 
 							if (carsDtClaimSettlsList != null) {
 
@@ -502,26 +502,132 @@ else {
 
 
 
+//
+//							String sequence = "";
+//							String[] splitCoverCode = carsDtClaimCCovers.getCoverCode().split("\\.", 2);
+//							if (!Utility.isEmpty(claimTransferRequest.getClaimTransferNotification())) {
+//								sequence = claimTransferRequest.getClaimTransferNotification();
+//							}
+//							if (!Utility.isEmpty((splitCoverCode[0]))) {
+//								sequence = sequence + "-" + splitCoverCode[0];
+//								claimTransferCoverRequest.setCoverCode(splitCoverCode[0]);
+//							}
+//							if (splitCoverCode.length > 1) {
+//								if (!Utility.isEmpty(splitCoverCode[1])) {
+//									sequence = sequence + "-" + splitCoverCode[1];
+//									claimTransferCoverRequest.setSubcoverCode(splitCoverCode[1]);
+//								}
+//							}
+//							if (!Utility.isEmpty(carsDtClaimCCovers.getSetType())) {
+//								sequence = sequence + "-" + carsDtClaimCCovers.getSetType();
+//							}
+//							claimTransferCoverRequest.setSequence(sequence);
+
+
+
+
+
+
+
+
+
 
 							String sequence = "";
+
+							String profileCode="";
+							if(carsDtClaimCCovers.getPayeeProfileCode()!=null){
+								profileCode=carsDtClaimCCovers.getPayeeProfileCode();
+							}
+							else {
+								profileCode="PERSON";
+							}
+
+							String profileType="";
+							if(carsDtClaimCCovers.getPayeeProfileType()!=null){
+								profileType=carsDtClaimCCovers.getPayeeProfileType();
+							}
+							else {
+								profileType="PERSON";
+							}
+
 							String[] splitCoverCode = carsDtClaimCCovers.getCoverCode().split("\\.", 2);
 							if (!Utility.isEmpty(claimTransferRequest.getClaimTransferNotification())) {
 								sequence = claimTransferRequest.getClaimTransferNotification();
 							}
-							if (!Utility.isEmpty((splitCoverCode[0]))) {
+
+							if (!Utility.isEmpty(carsDtClaimBodilyInjury.getInjuredSeq())&&!Utility.isEmpty(sequence)) {
+								sequence = sequence + "-" + carsDtClaimBodilyInjury.getInjuredSeq();
+							}
+							else{
+								sequence = carsDtClaimBodilyInjury.getInjuredSeq();
+
+							}
+
+
+							if (!Utility.isEmpty((splitCoverCode[0]))&&!Utility.isEmpty(sequence)) {
 								sequence = sequence + "-" + splitCoverCode[0];
 								claimTransferCoverRequest.setCoverCode(splitCoverCode[0]);
+							}else {
+								sequence = splitCoverCode[0];
+								claimTransferCoverRequest.setCoverCode(splitCoverCode[0]);
 							}
+
+
+
 							if (splitCoverCode.length > 1) {
 								if (!Utility.isEmpty(splitCoverCode[1])) {
 									sequence = sequence + "-" + splitCoverCode[1];
 									claimTransferCoverRequest.setSubcoverCode(splitCoverCode[1]);
 								}
 							}
-							if (!Utility.isEmpty(carsDtClaimCCovers.getSetType())) {
-								sequence = sequence + "-" + carsDtClaimCCovers.getSetType();
+
+							if (!Utility.isEmpty(carsDtClaimCCovers.getPayeeAssessmentType())&&!Utility.isEmpty(sequence)) {
+								sequence = sequence + "-" + carsDtClaimCCovers.getPayeeAssessmentType();
 							}
+							else{
+								sequence = carsDtClaimCCovers.getPayeeAssessmentType();
+
+							}
+
+
+							if (!Utility.isEmpty(profileType)&&!Utility.isEmpty(sequence)) {
+								sequence = sequence + "-" +profileType;
+							}
+							else{
+								sequence = profileType;
+
+							}
+
+							if (!Utility.isEmpty(profileCode)&&!Utility.isEmpty(sequence)) {
+
+								sequence = sequence + "-" + profileCode;
+							}
+							else{
+								sequence = profileCode;
+
+							}
+
+
+
+							if (!Utility.isEmpty(carsDtClaimCCovers.getCurrency())) {
+								sequence = sequence + "-" + carsDtClaimCCovers.getCurrency();
+							}
+
+
 							claimTransferCoverRequest.setSequence(sequence);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -557,12 +663,12 @@ else {
 							claimTransferCoverRequest.setReserveAmount(carsDtClaimCCovers.getReserveAmount());
 							claimTransferCoverRequest
 									.setRecoveryReserveAmount(carsDtClaimCCovers.getRecoveryReserveAmount());
-
+							claimTransferCoverRequest.setReserveCurrency(carsDtClaimCCovers.getCurrency());
 							List<ClaimTransferSettlementRequest> claimTransferSettlementRequestList = new ArrayList<ClaimTransferSettlementRequest>();
 
 							List<CarsDtClaimSettls> carsDtClaimSettlsList = carsDtClaimSettlsRepository
 									.getCarsDtClaimSettls(insuranceId, scriptName, notification,
-											carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(),carsDtClaimCCovers.getNotificationSeq());
+											carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(),carsDtClaimCCovers.getNotificationSeq(),carsDtClaimCCovers.getPayeeProfileCode());
 
 							if (carsDtClaimSettlsList != null) {
 
@@ -666,28 +772,194 @@ else {
 						for (CarsDtClaimCCovers carsDtClaimCCovers : carsDtClaimCCoversList) {
 
 							ClaimTransferCoverRequest claimTransferCoverRequest = new ClaimTransferCoverRequest();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 							String sequence = "";
+
+							String profileCode="";
+							if(carsDtClaimCCovers.getPayeeProfileCode()!=null){
+								profileCode=carsDtClaimCCovers.getPayeeProfileCode();
+							}
+							else {
+								profileCode="PERSON";
+							}
+
+							String profileType="";
+							if(carsDtClaimCCovers.getPayeeProfileType()!=null){
+								profileType=carsDtClaimCCovers.getPayeeProfileType();
+							}
+							else {
+								profileType="PERSON";
+							}
+
 							String[] splitCoverCode = carsDtClaimCCovers.getCoverCode().split("\\.", 2);
 							if (!Utility.isEmpty(claimTransferRequest.getClaimTransferNotification())) {
 								sequence = claimTransferRequest.getClaimTransferNotification();
 							}
-							if (!Utility.isEmpty((splitCoverCode[0]))) {
+
+							if (!Utility.isEmpty(carsDtClaimMaterialDamage.getMaterialDamageSequence())&&!Utility.isEmpty(sequence)) {
+								sequence = sequence + "-" + carsDtClaimMaterialDamage.getMaterialDamageSequence();
+							}
+							else{
+								sequence = carsDtClaimMaterialDamage.getMaterialDamageSequence();
+
+							}
+
+
+							if (!Utility.isEmpty((splitCoverCode[0]))&&!Utility.isEmpty(sequence)) {
 								sequence = sequence + "-" + splitCoverCode[0];
 								claimTransferCoverRequest.setCoverCode(splitCoverCode[0]);
+							}else {
+								sequence = splitCoverCode[0];
+								claimTransferCoverRequest.setCoverCode(splitCoverCode[0]);
 							}
+
+
+
 							if (splitCoverCode.length > 1) {
 								if (!Utility.isEmpty(splitCoverCode[1])) {
 									sequence = sequence + "-" + splitCoverCode[1];
 									claimTransferCoverRequest.setSubcoverCode(splitCoverCode[1]);
 								}
 							}
-							if (!Utility.isEmpty(carsDtClaimCCovers.getSetType())) {
-								sequence = sequence + "-" + carsDtClaimCCovers.getSetType();
+
+							if (!Utility.isEmpty(carsDtClaimCCovers.getPayeeAssessmentType())&&!Utility.isEmpty(sequence)) {
+								sequence = sequence + "-" + carsDtClaimCCovers.getPayeeAssessmentType();
 							}
+							else{
+								sequence = carsDtClaimCCovers.getPayeeAssessmentType();
+
+							}
+
+
+							if (!Utility.isEmpty(profileType)&&!Utility.isEmpty(sequence)) {
+								sequence = sequence + "-" +profileType;
+							}
+							else{
+								sequence = profileType;
+
+							}
+
+							if (!Utility.isEmpty(profileCode)&&!Utility.isEmpty(sequence)) {
+
+								sequence = sequence + "-" + profileCode;
+							}
+							else{
+								sequence = profileCode;
+
+							}
+
+
+
+							if (!Utility.isEmpty(carsDtClaimCCovers.getCurrency())) {
+								sequence = sequence + "-" + carsDtClaimCCovers.getCurrency();
+							}
+
+
 							claimTransferCoverRequest.setSequence(sequence);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//							String sequence = "";
+//							String[] splitCoverCode = carsDtClaimCCovers.getCoverCode().split("\\.", 2);
+//							if (!Utility.isEmpty(claimTransferRequest.getClaimTransferNotification())) {
+//								sequence = claimTransferRequest.getClaimTransferNotification();
+//							}
+//							if (!Utility.isEmpty((splitCoverCode[0]))) {
+//								sequence = sequence + "-" + splitCoverCode[0];
+//								claimTransferCoverRequest.setCoverCode(splitCoverCode[0]);
+//							}
+//							if (splitCoverCode.length > 1) {
+//								if (!Utility.isEmpty(splitCoverCode[1])) {
+//									sequence = sequence + "-" + splitCoverCode[1];
+//									claimTransferCoverRequest.setSubcoverCode(splitCoverCode[1]);
+//								}
+//							}
+//							if (!Utility.isEmpty(carsDtClaimCCovers.getSetType())) {
+//								sequence = sequence + "-" + carsDtClaimCCovers.getSetType();
+//							}
+//
+//							//todo
+//							claimTransferCoverRequest.setSequence(sequence);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 							claimTransferCoverRequest.setRiskType(carsDtClaimCCovers.getSetType());
 							claimTransferCoverRequest.setAssessmentType(carsDtClaimCCovers.getPayeeAssessmentType());
-
+							claimTransferCoverRequest.setReserveCurrency(carsDtClaimCCovers.getCurrency());
 
 							if (carsDtClaimCCovers.getPayeeProfileType()!=null){
 								claimTransferCoverRequest.setProfileType(carsDtClaimCCovers.getPayeeProfileType());
@@ -718,7 +990,7 @@ else {
 
 							List<CarsDtClaimSettls> carsDtClaimSettlsList = carsDtClaimSettlsRepository
 									.getCarsDtClaimSettls(insuranceId, scriptName, notification,
-											carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(),carsDtClaimCCovers.getNotificationSeq());
+											carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(),carsDtClaimCCovers.getNotificationSeq(),carsDtClaimCCovers.getPayeeProfileCode());
 
 							if (carsDtClaimSettlsList != null) {
 

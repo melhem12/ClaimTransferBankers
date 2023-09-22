@@ -1,5 +1,6 @@
 package com.claimTransfer.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,6 +25,7 @@ public interface CarsDtClaimSettlsRepository extends JpaRepository<CarsDtClaimSe
 			+ " AND NOTIFICATION = trim(?3) "
 			+ " AND COVER_CODE = trim(?4) "
 			+" AND SET_TYPE=trim(?5) " +
-			" AND  NOTIFICATION_SEQ=trim(?6) ", nativeQuery = true)
-	List<CarsDtClaimSettls> getCarsDtClaimSettls(String insuranceId ,String scriptName,String notification,String coverCode,String riskType ,String notificationSequence);
+			" AND  NOTIFICATION_SEQ=trim(?6) "
+			+" AND PAYEE_CODE =trim(?7) " , nativeQuery = true)
+	List<CarsDtClaimSettls> getCarsDtClaimSettls(String insuranceId , String scriptName, String notification, String coverCode, String riskType , String notificationSequence, String payeeCode);
 }
