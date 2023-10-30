@@ -457,10 +457,10 @@ public class ClaimTransferController {
 
 	@GetMapping("/claims1")
 	public ResponseEntity<ClaimsResponse> generateClaimsSurvey1(
-			@RequestParam("notification") String notification,@RequestParam("insuranceId") String insuranceId   ,@RequestParam("fromDate") String  fromDate,@RequestParam("batch") String  batch,@RequestParam("toDate") String   toDate)
+			@RequestParam("notification") String notification,@RequestParam("insuranceId") String insuranceId   ,@RequestParam("fromDate") String  fromDate,@RequestParam("batch") String  batch,@RequestParam("toDate") String   toDate,@RequestParam("functionName")String functionName)
 			throws Exception {
 		try {
-			return claimTransferService.generateClaimsSurvey( notification,insuranceId, fromDate, batch,  toDate);
+			return claimTransferService.generateClaimsSurvey( notification,insuranceId, fromDate, batch,  toDate,functionName);
 
 		} catch (
 

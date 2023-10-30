@@ -8,6 +8,15 @@ public class ClaimsRequest {
    String  fromDate;
    String  batch;
    String   toDate;
+   String functionName;
+
+    public String getFunctionName() {
+        return functionName;
+    }
+
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
+    }
 
     public String getNotification() {
         return notification;
