@@ -26,8 +26,8 @@ public interface CarsDtClaimSettlsRepository extends JpaRepository<CarsDtClaimSe
 		+ " AND COVER_CODE = trim(?4) "
 		+" AND SET_TYPE=trim(?5) " +
 		" AND  NOTIFICATION_SEQ=trim(?6) "
-		+" AND PAYEE_CODE = trim(?7)  " , nativeQuery = true)
-	List<CarsDtClaimSettls> getCarsDtClaimSettls(String insuranceId , String scriptName, String notification, String coverCode, String riskType , String notificationSequence, String payeeCode);
+		+" AND PAYEE_CODE = trim(?7)  AND  CURRENCY =trim(?8)  AND TRANSACTION =trim(?9)  " , nativeQuery = true)
+	List<CarsDtClaimSettls> getCarsDtClaimSettls(String insuranceId , String scriptName, String notification, String coverCode, String riskType , String notificationSequence, String payeeCode,String currency,String transaction);
 
 	@Query(value = "SELECT *  FROM CARS_DT_CLAIM_SETTLS WHERE INS_ID = trim(?1) "
 			+ " AND SCRIPT_NAME = trim(?2) "
@@ -35,8 +35,8 @@ public interface CarsDtClaimSettlsRepository extends JpaRepository<CarsDtClaimSe
 			+ " AND COVER_CODE = trim(?4) "
 			+" AND SET_TYPE=trim(?5) " +
 			" AND  NOTIFICATION_SEQ=trim(?6) "
-			+" AND PAYEE_CODE IS NULL  " , nativeQuery = true)
-	List<CarsDtClaimSettls> getCarsDtClaimSettlsNullPayeeCode(String insuranceId , String scriptName, String notification, String coverCode, String riskType , String notificationSequence);
+			+" AND PAYEE_CODE IS NULL  AND  CURRENCY =trim(?7)  AND TRANSACTION = trim(?8) " , nativeQuery = true)
+	List<CarsDtClaimSettls> getCarsDtClaimSettlsNullPayeeCode(String insuranceId , String scriptName, String notification, String coverCode, String riskType , String notificationSequence, String currenc,String transaction);
 }
 
 

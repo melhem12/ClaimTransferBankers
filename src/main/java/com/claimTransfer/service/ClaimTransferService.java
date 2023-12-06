@@ -342,14 +342,29 @@ public class ClaimTransferService {
 							// claimTransferCoverRequest.setRiskType("");
 							List<ClaimTransferSettlementRequest> claimTransferSettlementRequestList = new ArrayList<ClaimTransferSettlementRequest>();
 							List<CarsDtClaimSettls> carsDtClaimSettlsList = null;
+
+
+							String transaction ="1";
+							if(carsDtClaimCCovers.getRecoveryReserveAmount()!=null&&carsDtClaimCCovers.getReserveAmount()!=null){
+
+								if(Double.parseDouble(carsDtClaimCCovers.getRecoveryReserveAmount())>0){
+									transaction="2";
+								}
+								if(Double.parseDouble(carsDtClaimCCovers.getReserveAmount())>0){
+									transaction="1";
+								}
+
+							}
 							if (Utility.isEmpty(carsDtClaimCCovers.getPayeeProfileCode())) {
+
 								carsDtClaimSettlsList = carsDtClaimSettlsRepository
 										.getCarsDtClaimSettlsNullPayeeCode(insuranceId, scriptName, notification,
-												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq());
+												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq(),carsDtClaimCCovers.getCurrency(),transaction);
 							} else {
 								carsDtClaimSettlsList = carsDtClaimSettlsRepository
 										.getCarsDtClaimSettls(insuranceId, scriptName, notification,
-												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq(), carsDtClaimCCovers.getPayeeProfileCode());
+												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq(), carsDtClaimCCovers.getPayeeProfileCode(),carsDtClaimCCovers.getCurrency(),transaction);
+
 							}
 
 
@@ -572,14 +587,28 @@ public class ClaimTransferService {
 							claimTransferCoverRequest.setReserveCurrency(carsDtClaimCCovers.getCurrency());
 							List<ClaimTransferSettlementRequest> claimTransferSettlementRequestList = new ArrayList<ClaimTransferSettlementRequest>();
 							List<CarsDtClaimSettls> carsDtClaimSettlsList = null;
+
+							String transaction ="1";
+							if(carsDtClaimCCovers.getRecoveryReserveAmount()!=null&&carsDtClaimCCovers.getReserveAmount()!=null){
+
+								if(Double.parseDouble(carsDtClaimCCovers.getRecoveryReserveAmount())>0){
+									transaction="2";
+								}
+								if(Double.parseDouble(carsDtClaimCCovers.getReserveAmount())>0){
+									transaction="1";
+								}
+
+							}
+
+
 							if (Utility.isEmpty(carsDtClaimCCovers.getPayeeProfileCode())) {
 								carsDtClaimSettlsList = carsDtClaimSettlsRepository
 										.getCarsDtClaimSettlsNullPayeeCode(insuranceId, scriptName, notification,
-												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq());
+												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq(),carsDtClaimCCovers.getCurrency(),transaction);
 							} else {
 								carsDtClaimSettlsList = carsDtClaimSettlsRepository
 										.getCarsDtClaimSettls(insuranceId, scriptName, notification,
-												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq(), carsDtClaimCCovers.getPayeeProfileCode());
+												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq(), carsDtClaimCCovers.getPayeeProfileCode(),carsDtClaimCCovers.getCurrency(),transaction);
 							}
 
 							if (carsDtClaimSettlsList != null) {
@@ -808,14 +837,25 @@ public class ClaimTransferService {
 
 							List<ClaimTransferSettlementRequest> claimTransferSettlementRequestList = new ArrayList<ClaimTransferSettlementRequest>();
 							List<CarsDtClaimSettls> carsDtClaimSettlsList = null;
+							String transaction ="1";
+							if(carsDtClaimCCovers.getRecoveryReserveAmount()!=null&&carsDtClaimCCovers.getReserveAmount()!=null){
+
+								if(Double.parseDouble(carsDtClaimCCovers.getRecoveryReserveAmount())>0){
+									transaction="2";
+								}
+								if(Double.parseDouble(carsDtClaimCCovers.getReserveAmount())>0){
+									transaction="1";
+								}
+
+							}
 							if (Utility.isEmpty(carsDtClaimCCovers.getPayeeProfileCode())) {
 								carsDtClaimSettlsList = carsDtClaimSettlsRepository
 										.getCarsDtClaimSettlsNullPayeeCode(insuranceId, scriptName, notification,
-												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq());
+												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq(),carsDtClaimCCovers.getCurrency(),transaction);
 							} else {
 								carsDtClaimSettlsList = carsDtClaimSettlsRepository
 										.getCarsDtClaimSettls(insuranceId, scriptName, notification,
-												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq(), carsDtClaimCCovers.getPayeeProfileCode());
+												carsDtClaimCCovers.getCoverCode(), carsDtClaimCCovers.getSetType(), carsDtClaimCCovers.getNotificationSeq(), carsDtClaimCCovers.getPayeeProfileCode(),carsDtClaimCCovers.getCurrency(),transaction);
 							}
 							if (carsDtClaimSettlsList != null) {
 
